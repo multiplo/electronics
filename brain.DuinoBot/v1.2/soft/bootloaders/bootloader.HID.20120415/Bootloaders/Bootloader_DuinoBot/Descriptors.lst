@@ -1,0 +1,159 @@
+   1               		.file	"Descriptors.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.CALLBACK_USB_GetDescriptor,"ax",@progbits
+  17               	.global	CALLBACK_USB_GetDescriptor
+  19               	CALLBACK_USB_GetDescriptor:
+  20               	.LFB93:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 FA01      		movw r30,r20
+  26               	.LSM1:
+  27 0002 9130      		cpi r25,lo8(1)
+  28               	.LVL1:
+  29 0004 01F4      		brne .L2
+  30               	.LVL2:
+  31 0006 80E0      		ldi r24,lo8(DeviceDescriptor)
+  32 0008 90E0      		ldi r25,hi8(DeviceDescriptor)
+  33               	.LVL3:
+  34 000a 22E1      		ldi r18,lo8(18)
+  35 000c 30E0      		ldi r19,hi8(18)
+  36               	.LVL4:
+  37 000e 00C0      		rjmp .L3
+  38               	.LVL5:
+  39               	.L2:
+  40               	.LSM2:
+  41 0010 9230      		cpi r25,lo8(2)
+  42 0012 01F4      		brne .L4
+  43 0014 80E0      		ldi r24,lo8(ConfigurationDescriptor)
+  44 0016 90E0      		ldi r25,hi8(ConfigurationDescriptor)
+  45               	.LVL6:
+  46 0018 22E2      		ldi r18,lo8(34)
+  47 001a 30E0      		ldi r19,hi8(34)
+  48               	.LVL7:
+  49 001c 00C0      		rjmp .L3
+  50               	.LVL8:
+  51               	.L4:
+  52               	.LSM3:
+  53 001e 9132      		cpi r25,lo8(33)
+  54 0020 01F0      		breq .L5
+  55 0022 80E0      		ldi r24,lo8(HIDReport)
+  56 0024 90E0      		ldi r25,hi8(HIDReport)
+  57               	.LVL9:
+  58 0026 25E1      		ldi r18,lo8(21)
+  59 0028 30E0      		ldi r19,hi8(21)
+  60               	.LVL10:
+  61 002a 00C0      		rjmp .L3
+  62               	.LVL11:
+  63               	.L5:
+  64 002c 80E0      		ldi r24,lo8(ConfigurationDescriptor+18)
+  65 002e 90E0      		ldi r25,hi8(ConfigurationDescriptor+18)
+  66               	.LVL12:
+  67 0030 29E0      		ldi r18,lo8(9)
+  68 0032 30E0      		ldi r19,hi8(9)
+  69               	.LVL13:
+  70               	.L3:
+  71               	.LSM4:
+  72 0034 9183      		std Z+1,r25
+  73 0036 8083      		st Z,r24
+  74               	.LSM5:
+  75 0038 C901      		movw r24,r18
+  76               	.LVL14:
+  77               	/* epilogue start */
+  78 003a 0895      		ret
+  79               	.LFE93:
+  81               	.global	HIDReport
+  82               		.data
+  85               	HIDReport:
+  86 0000 06        		.byte	6
+  87 0001 DC        		.byte	-36
+  88 0002 FF        		.byte	-1
+  89 0003 09        		.byte	9
+  90 0004 FB        		.byte	-5
+  91 0005 A1        		.byte	-95
+  92 0006 01        		.byte	1
+  93 0007 09        		.byte	9
+  94 0008 02        		.byte	2
+  95 0009 15        		.byte	21
+  96 000a 00        		.byte	0
+  97 000b 25        		.byte	37
+  98 000c FF        		.byte	-1
+  99 000d 75        		.byte	117
+ 100 000e 08        		.byte	8
+ 101 000f 96        		.byte	-106
+ 102 0010 82        		.byte	-126
+ 103 0011 00        		.byte	0
+ 104 0012 91        		.byte	-111
+ 105 0013 02        		.byte	2
+ 106 0014 C0        		.byte	-64
+ 107               	.global	DeviceDescriptor
+ 110               	DeviceDescriptor:
+ 111 0015 12        		.byte	18
+ 112 0016 01        		.byte	1
+ 113 0017 1001      		.word	272
+ 114 0019 00        		.byte	0
+ 115 001a 00        		.byte	0
+ 116 001b 00        		.byte	0
+ 117 001c 08        		.byte	8
+ 118 001d EB03      		.word	1003
+ 119 001f 6720      		.word	8295
+ 120 0021 0100      		.word	1
+ 121 0023 00        		.byte	0
+ 122 0024 00        		.byte	0
+ 123 0025 00        		.byte	0
+ 124 0026 01        		.byte	1
+ 125               	.global	ConfigurationDescriptor
+ 128               	ConfigurationDescriptor:
+ 129 0027 09        		.byte	9
+ 130 0028 02        		.byte	2
+ 131 0029 2200      		.word	34
+ 132 002b 01        		.byte	1
+ 133 002c 01        		.byte	1
+ 134 002d 00        		.byte	0
+ 135 002e 80        		.byte	-128
+ 136 002f 32        		.byte	50
+ 137 0030 09        		.byte	9
+ 138 0031 04        		.byte	4
+ 139 0032 00        		.byte	0
+ 140 0033 00        		.byte	0
+ 141 0034 01        		.byte	1
+ 142 0035 03        		.byte	3
+ 143 0036 00        		.byte	0
+ 144 0037 00        		.byte	0
+ 145 0038 00        		.byte	0
+ 146 0039 09        		.byte	9
+ 147 003a 21        		.byte	33
+ 148 003b 1101      		.word	273
+ 149 003d 00        		.byte	0
+ 150 003e 01        		.byte	1
+ 151 003f 22        		.byte	34
+ 152 0040 1500      		.word	21
+ 153 0042 07        		.byte	7
+ 154 0043 05        		.byte	5
+ 155 0044 81        		.byte	-127
+ 156 0045 03        		.byte	3
+ 157 0046 4000      		.word	64
+ 158 0048 01        		.byte	1
+ 183               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 Descriptors.c
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:2      *ABS*:0000003f __SREG__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:3      *ABS*:0000003e __SP_H__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:4      *ABS*:0000003d __SP_L__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:5      *ABS*:00000034 __CCP__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:7      *ABS*:00000001 __zero_reg__
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:19     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:110    .data:00000015 DeviceDescriptor
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:128    .data:00000027 ConfigurationDescriptor
+C:\DOCUME~1\Alan\CONFIG~1\Temp/cc0beyTb.s:85     .data:00000000 HIDReport
+
+UNDEFINED SYMBOLS
+__do_copy_data

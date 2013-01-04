@@ -1,0 +1,8 @@
+::2009.01.17::
+
+- Estos son los sensores basados en ICs tipo CNY70, TCRT1000, TCRT5000, etc..
+- Nomenclatura: Las XXX no representan nada, como en los bumpers (ver la documentación de éstos). Son sólo para diferenciar posibles
+futuros modelos:
+	- Sen.IRActive001
+	- Sen.IRActive002...
+

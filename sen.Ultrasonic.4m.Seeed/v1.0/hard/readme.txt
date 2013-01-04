@@ -1,0 +1,1 @@
+::Sen.Ultrasonic.4m.Seeed::This sensor is manufactured by Seeedstudio, but we designed the plastic case:Code: SEN136B5BURL (2011.12.15): http://www.seeedstudio.com/depot/ultra-sonic-range-measurement-module-p-626.html?cPath=144_149
