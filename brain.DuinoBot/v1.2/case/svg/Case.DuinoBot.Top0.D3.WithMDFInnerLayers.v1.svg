@@ -41,9 +41,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.93328125"
-     inkscape:cx="245.91504"
-     inkscape:cy="979.69477"
+     inkscape:zoom="1.319859"
+     inkscape:cx="-114.34904"
+     inkscape:cy="906.10937"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -61,7 +61,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -93,26 +93,6 @@
     <path
        id="path3895"
        d="m 268.07937,0.2486722 a 5.2627929,5.2627929 0 0 0 -5.26278,-5.2627957"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path3897"
-       d="m 43.2058,41.595113 0,-6.315353"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path3899"
-       d="m 33.381906,41.595113 9.823894,0"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path3901"
-       d="m 33.381906,35.27976 0,6.315353"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path3903"
-       d="m 43.2058,35.27976 -9.823894,0"
        style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <path
@@ -297,11 +277,6 @@
          id="path3975" />
     </g>
     <path
-       id="path3979"
-       d="m 38.293865,50.015586 a 11.578147,11.578147 0 1 0 0,-23.156293 11.578147,11.578147 0 1 0 0,23.156293 z"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
        id="path3981"
        d="m 224.07528,216.89954 a 3.508535,3.508535 0 1 0 0,-7.01707 3.508535,3.508535 0 1 0 0,7.01707 z"
        style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
@@ -352,44 +327,24 @@
        style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <path
-       id="path4003"
-       d="m 48.929091,86.939724 -17.893501,0"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path4005"
-       d="m 48.929091,97.816185 0,-10.876461"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path4007"
-       d="m 31.03559,97.816185 17.893501,0"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
-       id="path4009"
-       d="m 31.03559,86.939724 0,10.876461"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
-    <path
        id="path4011"
-       d="m 48.929091,61.869985 -17.893501,0"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 50.134138,61.137505 -20.303595,0"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <path
        id="path4013"
-       d="m 48.929091,72.746428 0,-10.876443"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 50.134138,73.478908 0,-12.341403"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <path
        id="path4015"
-       d="m 31.03559,72.746428 17.893501,0"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 29.830543,73.478908 20.303595,0"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <path
        id="path4017"
-       d="m 31.03559,61.869985 0,10.876443"
-       style="fill:none;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 29.830543,61.137505 0,12.341403"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0" />
     <g
        style="stroke:#ff0000;stroke-width:0.35703969;stroke-miterlimit:4;stroke-dasharray:none"
@@ -510,6 +465,19 @@
            style="font-size:8.81673145px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Arial;-inkscape-font-specification:Arial"><tspan
    id="tspan4265-3-5-4"
    style="font-size:8.81673145px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Neuropol X Free;-inkscape-font-specification:Neuropol X Free">M</tspan>1</tspan></tspan></text>
+    <text
+       transform="scale(1.1326601,0.8828774)"
+       sodipodi:linespacing="125%"
+       id="text3634-2-3-0"
+       y="64.045387"
+       x="81.701317"
+       style="font-size:16.37803841px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica;-inkscape-font-specification:Helvetica"
+       xml:space="preserve"><tspan
+         style="font-size:16.37803841px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Neogrey;-inkscape-font-specification:Neogrey"
+         y="64.045387"
+         x="81.701317"
+         id="tspan3636-4-2-2"
+         sodipodi:role="line">RobotGroup</tspan></text>
     <text
        transform="scale(0.81000734,1.2345567)"
        sodipodi:linespacing="125%"
@@ -733,5 +701,25 @@
          x="84.200302"
          id="tspan3636-4-2-2-3-4"
          sodipodi:role="line">DuinoBot v1.2</tspan></text>
+    <path
+       id="path4011-1"
+       d="m 50.064739,86.1995 -20.303595,0"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path4013-7"
+       d="m 50.064739,98.540903 0,-12.341403"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path4015-4"
+       d="m 29.761144,98.540903 20.303595,0"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path4017-0"
+       d="m 29.761144,86.1995 0,12.341403"
+       style="fill:none;stroke:#ff0000;stroke-width:1.134691;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
