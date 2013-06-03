@@ -1,0 +1,382 @@
+*************************************************************
+FileName = DuinoBot_V2_3_2A.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : DuinoBot_V2_3_2A.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+*************************************************************
+
+*************************************************************
+Generating : Gnd
+      File : DuinoBot_V2_3_2A.G1
+
+    Adding Layer      : Gnd
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D43
+    D45
+    D46
+    D49
+    D50
+    D53
+*************************************************************
+
+*************************************************************
+Generating : Power
+      File : DuinoBot_V2_3_2A.G2
+
+    Adding Layer      : Power
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D43
+    D45
+    D48
+    D49
+    D53
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : DuinoBot_V2_3_2A.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D42
+    D46
+    D47
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+    D55
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : DuinoBot_V2_3_2A.GPB
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D49
+    D50
+    D51
+    D52
+    D55
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : DuinoBot_V2_3_2A.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D49
+    D50
+    D51
+    D52
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : DuinoBot_V2_3_2A.GTO
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D42
+    D48
+    D56
+    D57
+    D58
+    D59
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : DuinoBot_V2_3_2A.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : DuinoBot_V2_3_2A.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D60
+    D61
+    D62
+    D63
+    D64
+    D65
+    D66
+    D67
+    D68
+    D69
+    D70
+    D71
+    D72
+    D73
+    D74
+    D75
+    D76
+    D77
+    D78
+    D79
+    D80
+    D81
+    D82
+    D83
+    D84
+    D85
+    D86
+    D87
+    D88
+    D89
+    D90
+    D91
+    D92
+    D93
+    D94
+    D95
+    D96
+    D97
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : DuinoBot_V2_3_2A.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D92
+    D93
+    D94
+    D95
+    D96
+    D97
+    D98
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : DuinoBot_V2_3_2A.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D55
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : DuinoBot_V2_3_2A.GBO
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+    D48
+    D56
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : DuinoBot_V2_3_2A.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+    D48
+*************************************************************
+
+*************************************************************
+Generating : Drill Drawing
+      File : DuinoBot_V2_3_2A.GD1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Drawing
+
+
+Used DCodes :
+    D56
+    D99
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : DuinoBot_V2_3_2A.GG1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D99
+*************************************************************
+

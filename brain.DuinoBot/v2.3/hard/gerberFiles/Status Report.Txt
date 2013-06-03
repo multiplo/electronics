@@ -1,0 +1,27 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Project [PCB_DuinoBot_V2_3.PrjPcb]
+   Generated File[DuinoBot_V2_3_2A.GTL]
+   Generated File[DuinoBot_V2_3_2A.G1]
+   Generated File[DuinoBot_V2_3_2A.G2]
+   Generated File[DuinoBot_V2_3_2A.GBL]
+   Generated File[DuinoBot_V2_3_2A.GPB]
+   Generated File[DuinoBot_V2_3_2A.GPT]
+   Generated File[DuinoBot_V2_3_2A.GTO]
+   Generated File[DuinoBot_V2_3_2A.GTP]
+   Generated File[DuinoBot_V2_3_2A.GTS]
+   Generated File[DuinoBot_V2_3_2A.GBS]
+   Generated File[DuinoBot_V2_3_2A.GBP]
+   Generated File[DuinoBot_V2_3_2A.GBO]
+   Generated File[DuinoBot_V2_3_2A.GKO]
+   Generated File[DuinoBot_V2_3_2A.GD1]
+   Generated File[DuinoBot_V2_3_2A.GG1]
+   Generated File[DuinoBot_V2_3_2A.RUL]
+   Generated File[DuinoBot_V2_3_2A.EXTREP]
+   Generated File[DuinoBot_V2_3_2A.REP]
+
+
+Files Generated   : 18
+Documents Printed : 0
+
+Finished Output Generation At 17:12:49 On 12/11/2012
