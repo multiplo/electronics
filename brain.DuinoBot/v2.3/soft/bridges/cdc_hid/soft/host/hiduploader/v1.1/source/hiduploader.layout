@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="Source\ihex.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="4493" topLine="131" />
+	</File>
+	<File name="Source\main.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="4213" topLine="0" />
+	</File>
+	<File name="Source\usb_WINDOWS.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="3901" topLine="0" />
+	</File>
+	<File name="Source\usb_XXX.h" open="0" top="0" tabpos="3">
+		<Cursor position="83" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

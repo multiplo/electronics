@@ -1,0 +1,643 @@
+
+optiboot_DB23_644p.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000210  0000fc00  0000fc00  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000028  00000000  00000000  00000264  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 0000005f  00000000  00000000  0000028c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000002c4  00000000  00000000  000002eb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000178  00000000  00000000  000005af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   00000438  00000000  00000000  00000727  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000080  00000000  00000000  00000b60  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    0000014f  00000000  00000000  00000be0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000002d8  00000000  00000000  00000d2f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .version      00000002  00000000  00000000  00001007  2**0
+                  CONTENTS, READONLY
+ 10 .debug_ranges 00000078  00000000  00000000  00001009  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+0000fc00 <main>:
+#define rstVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+4))
+#define wdtVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+6))
+#endif
+
+/* main program starts here */
+int main(void) {
+    fc00:	11 24       	eor	r1, r1
+#ifdef __AVR_ATmega8__
+  SP=RAMEND;  // This is done by hardware reset
+#endif
+
+  // Adaboot no-wait mod
+  ch = MCUSR;
+    fc02:	84 b7       	in	r24, 0x34	; 52
+  MCUSR = 0;
+    fc04:	14 be       	out	0x34, r1	; 52
+  if (!(ch & _BV(EXTRF))) appStart();
+    fc06:	81 ff       	sbrs	r24, 1
+    fc08:	fe d0       	rcall	.+508    	; 0xfe06 <appStart>
+
+#if LED_START_FLASHES > 0
+  // Set up Timer 1 for timeout counter
+  TCCR1B = _BV(CS12) | _BV(CS10); // div 1024
+    fc0a:	85 e0       	ldi	r24, 0x05	; 5
+    fc0c:	80 93 81 00 	sts	0x0081, r24
+  UCSRA = _BV(U2X); //Double speed mode USART
+  UCSRB = _BV(RXEN) | _BV(TXEN);  // enable Rx & Tx
+  UCSRC = _BV(URSEL) | _BV(UCSZ1) | _BV(UCSZ0);  // config USART; 8N1
+  UBRRL = (uint8_t)( (F_CPU + BAUD_RATE * 4L) / (BAUD_RATE * 8L) - 1 );
+#else
+  UCSR0A = _BV(U2X0); //Double speed mode USART0
+    fc10:	82 e0       	ldi	r24, 0x02	; 2
+    fc12:	80 93 c0 00 	sts	0x00C0, r24
+  UCSR0B = _BV(RXEN0) | _BV(TXEN0);
+    fc16:	88 e1       	ldi	r24, 0x18	; 24
+    fc18:	80 93 c1 00 	sts	0x00C1, r24
+  UCSR0C = _BV(UCSZ00) | _BV(UCSZ01);
+    fc1c:	86 e0       	ldi	r24, 0x06	; 6
+    fc1e:	80 93 c2 00 	sts	0x00C2, r24
+  UBRR0L = (uint8_t)( (F_CPU + BAUD_RATE * 4L) / (BAUD_RATE * 8L) - 1 );
+    fc22:	80 e1       	ldi	r24, 0x10	; 16
+    fc24:	80 93 c4 00 	sts	0x00C4, r24
+#endif
+#endif
+
+  // Set up watchdog to trigger after 500ms
+  watchdogConfig(WATCHDOG_1S);
+    fc28:	8e e0       	ldi	r24, 0x0E	; 14
+    fc2a:	c4 d0       	rcall	.+392    	; 0xfdb4 <watchdogConfig>
+
+  /* Set LED pin as output */
+  LED_DDR |= _BV(LED);
+    fc2c:	27 9a       	sbi	0x04, 7	; 4
+  
+  // Multiplo: Set Run switch pin as input with internal pullup
+  RUNSW_DDR &= ~_BV(RUNSW);
+    fc2e:	3f 98       	cbi	0x07, 7	; 7
+  RUNSW_PORT |= _BV(RUNSW);
+    fc30:	47 9a       	sbi	0x08, 7	; 8
+    fc32:	86 e0       	ldi	r24, 0x06	; 6
+}
+
+#if LED_START_FLASHES > 0
+void flash_led(uint8_t count) {
+  do {
+    TCNT1 = -(F_CPU/(1024*16));
+    fc34:	20 e3       	ldi	r18, 0x30	; 48
+    fc36:	3c ef       	ldi	r19, 0xFC	; 252
+    TIFR1 = _BV(TOV1);
+    fc38:	91 e0       	ldi	r25, 0x01	; 1
+}
+
+#if LED_START_FLASHES > 0
+void flash_led(uint8_t count) {
+  do {
+    TCNT1 = -(F_CPU/(1024*16));
+    fc3a:	30 93 85 00 	sts	0x0085, r19
+    fc3e:	20 93 84 00 	sts	0x0084, r18
+    TIFR1 = _BV(TOV1);
+    fc42:	96 bb       	out	0x16, r25	; 22
+    while(!(TIFR1 & _BV(TOV1)));
+    fc44:	b0 9b       	sbis	0x16, 0	; 22
+    fc46:	fe cf       	rjmp	.-4      	; 0xfc44 <main+0x44>
+#ifdef __AVR_ATmega8__
+    LED_PORT ^= _BV(LED);
+#else
+    LED_PIN |= _BV(LED);
+    fc48:	1f 9a       	sbi	0x03, 7	; 3
+}
+#endif
+
+// Watchdog functions. These are only safe with interrupts turned off.
+void watchdogReset() {
+  __asm__ __volatile__ (
+    fc4a:	a8 95       	wdr
+    LED_PORT ^= _BV(LED);
+#else
+    LED_PIN |= _BV(LED);
+#endif
+    watchdogReset();
+  } while (--count);
+    fc4c:	81 50       	subi	r24, 0x01	; 1
+    fc4e:	a9 f7       	brne	.-22     	; 0xfc3a <main+0x3a>
+    fc50:	cc 24       	eor	r12, r12
+    fc52:	dd 24       	eor	r13, r13
+      ch = SPM_PAGESIZE / 2;
+      do {
+        uint16_t a;
+        a = *bufPtr++;
+        a |= (*bufPtr++) << 8;
+        __boot_page_fill_short((uint16_t)(void*)addrPtr,a);
+    fc54:	99 24       	eor	r9, r9
+    fc56:	93 94       	inc	r9
+        addrPtr += 2;
+      } while (--ch);
+
+      // Write from programming buffer
+      __boot_page_write_short((uint16_t)(void*)address);
+    fc58:	b5 e0       	ldi	r27, 0x05	; 5
+    fc5a:	8b 2e       	mov	r8, r27
+      boot_spm_busy_wait();
+
+#if defined(RWWSRE)
+      // Reenable read access to flash
+      boot_rww_enable();
+    fc5c:	a1 e1       	ldi	r26, 0x11	; 17
+    fc5e:	aa 2e       	mov	r10, r26
+      do *bufPtr++ = getch();
+      while (--length);
+
+      // If we are in NRWW section, page erase has to be delayed until now.
+      // Todo: Take RAMPZ into account
+      if (address >= NRWWSTART) __boot_page_erase_short((uint16_t)(void*)address);
+    fc60:	f3 e0       	ldi	r31, 0x03	; 3
+    fc62:	bf 2e       	mov	r11, r31
+#endif
+
+  /* Forever loop */
+  for (;;) {
+    /* get character from UART */
+    ch = getch();
+    fc64:	ad d0       	rcall	.+346    	; 0xfdc0 <getch>
+	
+    if(ch == STK_GET_PARAMETER) {
+    fc66:	81 34       	cpi	r24, 0x41	; 65
+    fc68:	61 f4       	brne	.+24     	; 0xfc82 <main+0x82>
+      unsigned char which = getch();
+    fc6a:	aa d0       	rcall	.+340    	; 0xfdc0 <getch>
+    fc6c:	08 2f       	mov	r16, r24
+      verifySpace();
+    fc6e:	bb d0       	rcall	.+374    	; 0xfde6 <verifySpace>
+      if (which == 0x82) {
+    fc70:	02 38       	cpi	r16, 0x82	; 130
+    fc72:	11 f0       	breq	.+4      	; 0xfc78 <main+0x78>
+	/*
+	 * Send optiboot version as "minor SW version"
+	 */
+	putch(OPTIBOOT_MINVER);
+      } else if (which == 0x81) {
+    fc74:	01 38       	cpi	r16, 0x81	; 129
+    fc76:	11 f4       	brne	.+4      	; 0xfc7c <main+0x7c>
+	  putch(OPTIBOOT_MAJVER);
+    fc78:	84 e0       	ldi	r24, 0x04	; 4
+    fc7a:	01 c0       	rjmp	.+2      	; 0xfc7e <main+0x7e>
+      } else {
+	/*
+	 * GET PARAMETER returns a generic 0x03 reply for
+         * other parameters - enough to keep Avrdude happy
+	 */
+	putch(0x03);
+    fc7c:	83 e0       	ldi	r24, 0x03	; 3
+    fc7e:	92 d0       	rcall	.+292    	; 0xfda4 <putch>
+    fc80:	8e c0       	rjmp	.+284    	; 0xfd9e <main+0x19e>
+      }
+    }
+    else if(ch == STK_SET_DEVICE) {
+    fc82:	82 34       	cpi	r24, 0x42	; 66
+    fc84:	11 f4       	brne	.+4      	; 0xfc8a <main+0x8a>
+      // SET DEVICE is ignored
+      getNch(20);
+    fc86:	84 e1       	ldi	r24, 0x14	; 20
+    fc88:	03 c0       	rjmp	.+6      	; 0xfc90 <main+0x90>
+    }
+    else if(ch == STK_SET_DEVICE_EXT) {
+    fc8a:	85 34       	cpi	r24, 0x45	; 69
+    fc8c:	19 f4       	brne	.+6      	; 0xfc94 <main+0x94>
+      // SET DEVICE EXT is ignored
+      getNch(5);
+    fc8e:	85 e0       	ldi	r24, 0x05	; 5
+    fc90:	b2 d0       	rcall	.+356    	; 0xfdf6 <getNch>
+    fc92:	85 c0       	rjmp	.+266    	; 0xfd9e <main+0x19e>
+    }
+    else if(ch == STK_LOAD_ADDRESS) {
+    fc94:	85 35       	cpi	r24, 0x55	; 85
+    fc96:	79 f4       	brne	.+30     	; 0xfcb6 <main+0xb6>
+      // LOAD ADDRESS
+      uint16_t newAddress;
+      newAddress = getch();
+    fc98:	93 d0       	rcall	.+294    	; 0xfdc0 <getch>
+      newAddress = (newAddress & 0xff) | (getch() << 8);
+    fc9a:	e8 2e       	mov	r14, r24
+    fc9c:	ff 24       	eor	r15, r15
+    fc9e:	90 d0       	rcall	.+288    	; 0xfdc0 <getch>
+    fca0:	08 2f       	mov	r16, r24
+    fca2:	10 e0       	ldi	r17, 0x00	; 0
+    fca4:	10 2f       	mov	r17, r16
+    fca6:	00 27       	eor	r16, r16
+    fca8:	0e 29       	or	r16, r14
+    fcaa:	1f 29       	or	r17, r15
+#ifdef RAMPZ
+      // Transfer top bit to RAMPZ
+      RAMPZ = (newAddress & 0x8000) ? 1 : 0;
+#endif
+      newAddress += newAddress; // Convert from word address to byte address
+    fcac:	00 0f       	add	r16, r16
+    fcae:	11 1f       	adc	r17, r17
+      address = newAddress;
+      verifySpace();
+    fcb0:	9a d0       	rcall	.+308    	; 0xfde6 <verifySpace>
+    fcb2:	68 01       	movw	r12, r16
+    fcb4:	74 c0       	rjmp	.+232    	; 0xfd9e <main+0x19e>
+    }
+    else if(ch == STK_UNIVERSAL) {
+    fcb6:	86 35       	cpi	r24, 0x56	; 86
+    fcb8:	21 f4       	brne	.+8      	; 0xfcc2 <main+0xc2>
+      // UNIVERSAL command is ignored
+      getNch(4);
+    fcba:	84 e0       	ldi	r24, 0x04	; 4
+    fcbc:	9c d0       	rcall	.+312    	; 0xfdf6 <getNch>
+      putch(0x00);
+    fcbe:	80 e0       	ldi	r24, 0x00	; 0
+    fcc0:	de cf       	rjmp	.-68     	; 0xfc7e <main+0x7e>
+    }
+    /* Write memory, length is big endian and is in bytes */
+    else if(ch == STK_PROG_PAGE) {
+    fcc2:	84 36       	cpi	r24, 0x64	; 100
+    fcc4:	09 f0       	breq	.+2      	; 0xfcc8 <main+0xc8>
+    fcc6:	40 c0       	rjmp	.+128    	; 0xfd48 <main+0x148>
+      // PROGRAM PAGE - we support flash programming only, not EEPROM
+      uint8_t *bufPtr;
+      uint16_t addrPtr;
+
+      getch();			/* getlen() */
+    fcc8:	7b d0       	rcall	.+246    	; 0xfdc0 <getch>
+      length = getch();
+    fcca:	7a d0       	rcall	.+244    	; 0xfdc0 <getch>
+    fccc:	08 2f       	mov	r16, r24
+      getch();
+    fcce:	78 d0       	rcall	.+240    	; 0xfdc0 <getch>
+
+      // If we are in RWW section, immediately start page erase
+      if (address < NRWWSTART) __boot_page_erase_short((uint16_t)(void*)address);
+    fcd0:	80 e0       	ldi	r24, 0x00	; 0
+    fcd2:	c8 16       	cp	r12, r24
+    fcd4:	80 ee       	ldi	r24, 0xE0	; 224
+    fcd6:	d8 06       	cpc	r13, r24
+    fcd8:	18 f4       	brcc	.+6      	; 0xfce0 <main+0xe0>
+    fcda:	f6 01       	movw	r30, r12
+    fcdc:	b7 be       	out	0x37, r11	; 55
+    fcde:	e8 95       	spm
+    fce0:	c0 e0       	ldi	r28, 0x00	; 0
+    fce2:	d1 e0       	ldi	r29, 0x01	; 1
+
+      // While that is going on, read in page contents
+      bufPtr = buff;
+      do *bufPtr++ = getch();
+    fce4:	6d d0       	rcall	.+218    	; 0xfdc0 <getch>
+    fce6:	89 93       	st	Y+, r24
+      while (--length);
+    fce8:	0c 17       	cp	r16, r28
+    fcea:	e1 f7       	brne	.-8      	; 0xfce4 <main+0xe4>
+
+      // If we are in NRWW section, page erase has to be delayed until now.
+      // Todo: Take RAMPZ into account
+      if (address >= NRWWSTART) __boot_page_erase_short((uint16_t)(void*)address);
+    fcec:	f0 e0       	ldi	r31, 0x00	; 0
+    fcee:	cf 16       	cp	r12, r31
+    fcf0:	f0 ee       	ldi	r31, 0xE0	; 224
+    fcf2:	df 06       	cpc	r13, r31
+    fcf4:	18 f0       	brcs	.+6      	; 0xfcfc <main+0xfc>
+    fcf6:	f6 01       	movw	r30, r12
+    fcf8:	b7 be       	out	0x37, r11	; 55
+    fcfa:	e8 95       	spm
+
+      // Read command terminator, start reply
+      verifySpace();
+    fcfc:	74 d0       	rcall	.+232    	; 0xfde6 <verifySpace>
+
+      // If only a partial page is to be programmed, the erase might not be complete.
+      // So check that here
+      boot_spm_busy_wait();
+    fcfe:	07 b6       	in	r0, 0x37	; 55
+    fd00:	00 fc       	sbrc	r0, 0
+    fd02:	fd cf       	rjmp	.-6      	; 0xfcfe <main+0xfe>
+    fd04:	a6 01       	movw	r20, r12
+    fd06:	a0 e0       	ldi	r26, 0x00	; 0
+    fd08:	b1 e0       	ldi	r27, 0x01	; 1
+      bufPtr = buff;
+      addrPtr = (uint16_t)(void*)address;
+      ch = SPM_PAGESIZE / 2;
+      do {
+        uint16_t a;
+        a = *bufPtr++;
+    fd0a:	2c 91       	ld	r18, X
+    fd0c:	30 e0       	ldi	r19, 0x00	; 0
+        a |= (*bufPtr++) << 8;
+    fd0e:	11 96       	adiw	r26, 0x01	; 1
+    fd10:	8c 91       	ld	r24, X
+    fd12:	11 97       	sbiw	r26, 0x01	; 1
+    fd14:	90 e0       	ldi	r25, 0x00	; 0
+    fd16:	98 2f       	mov	r25, r24
+    fd18:	88 27       	eor	r24, r24
+    fd1a:	82 2b       	or	r24, r18
+    fd1c:	93 2b       	or	r25, r19
+#define rstVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+4))
+#define wdtVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+6))
+#endif
+
+/* main program starts here */
+int main(void) {
+    fd1e:	12 96       	adiw	r26, 0x02	; 2
+      ch = SPM_PAGESIZE / 2;
+      do {
+        uint16_t a;
+        a = *bufPtr++;
+        a |= (*bufPtr++) << 8;
+        __boot_page_fill_short((uint16_t)(void*)addrPtr,a);
+    fd20:	fa 01       	movw	r30, r20
+    fd22:	0c 01       	movw	r0, r24
+    fd24:	97 be       	out	0x37, r9	; 55
+    fd26:	e8 95       	spm
+    fd28:	11 24       	eor	r1, r1
+        addrPtr += 2;
+    fd2a:	4e 5f       	subi	r20, 0xFE	; 254
+    fd2c:	5f 4f       	sbci	r21, 0xFF	; 255
+      } while (--ch);
+    fd2e:	f2 e0       	ldi	r31, 0x02	; 2
+    fd30:	a0 30       	cpi	r26, 0x00	; 0
+    fd32:	bf 07       	cpc	r27, r31
+    fd34:	51 f7       	brne	.-44     	; 0xfd0a <main+0x10a>
+
+      // Write from programming buffer
+      __boot_page_write_short((uint16_t)(void*)address);
+    fd36:	f6 01       	movw	r30, r12
+    fd38:	87 be       	out	0x37, r8	; 55
+    fd3a:	e8 95       	spm
+      boot_spm_busy_wait();
+    fd3c:	07 b6       	in	r0, 0x37	; 55
+    fd3e:	00 fc       	sbrc	r0, 0
+    fd40:	fd cf       	rjmp	.-6      	; 0xfd3c <main+0x13c>
+
+#if defined(RWWSRE)
+      // Reenable read access to flash
+      boot_rww_enable();
+    fd42:	a7 be       	out	0x37, r10	; 55
+    fd44:	e8 95       	spm
+    fd46:	2b c0       	rjmp	.+86     	; 0xfd9e <main+0x19e>
+#endif
+
+    }
+    /* Read memory block mode, length is big endian.  */
+    else if(ch == STK_READ_PAGE) {
+    fd48:	84 37       	cpi	r24, 0x74	; 116
+    fd4a:	b1 f4       	brne	.+44     	; 0xfd78 <main+0x178>
+      // READ PAGE - we only read flash
+      getch();			/* getlen() */
+    fd4c:	39 d0       	rcall	.+114    	; 0xfdc0 <getch>
+      length = getch();
+    fd4e:	38 d0       	rcall	.+112    	; 0xfdc0 <getch>
+    fd50:	f8 2e       	mov	r15, r24
+      getch();
+    fd52:	36 d0       	rcall	.+108    	; 0xfdc0 <getch>
+
+      verifySpace();
+    fd54:	48 d0       	rcall	.+144    	; 0xfde6 <verifySpace>
+    fd56:	f6 01       	movw	r30, r12
+    fd58:	ef 2c       	mov	r14, r15
+        putch(result);
+        address++;
+      }
+      while (--length);
+#else
+      do putch(pgm_read_byte_near(address++));
+    fd5a:	8f 01       	movw	r16, r30
+    fd5c:	0f 5f       	subi	r16, 0xFF	; 255
+    fd5e:	1f 4f       	sbci	r17, 0xFF	; 255
+    fd60:	84 91       	lpm	r24, Z+
+    fd62:	20 d0       	rcall	.+64     	; 0xfda4 <putch>
+      while (--length);
+    fd64:	ea 94       	dec	r14
+    fd66:	f8 01       	movw	r30, r16
+    fd68:	c1 f7       	brne	.-16     	; 0xfd5a <main+0x15a>
+#define rstVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+4))
+#define wdtVect (*(uint16_t*)(RAMSTART+SPM_PAGESIZE*2+6))
+#endif
+
+/* main program starts here */
+int main(void) {
+    fd6a:	08 94       	sec
+    fd6c:	c1 1c       	adc	r12, r1
+    fd6e:	d1 1c       	adc	r13, r1
+    fd70:	fa 94       	dec	r15
+    fd72:	cf 0c       	add	r12, r15
+    fd74:	d1 1c       	adc	r13, r1
+    fd76:	13 c0       	rjmp	.+38     	; 0xfd9e <main+0x19e>
+#endif
+#endif
+    }
+
+    /* Get device signature bytes  */
+    else if(ch == STK_READ_SIGN) {
+    fd78:	85 37       	cpi	r24, 0x75	; 117
+    fd7a:	39 f4       	brne	.+14     	; 0xfd8a <main+0x18a>
+      // READ SIGN - return what Avrdude wants to hear
+      verifySpace();
+    fd7c:	34 d0       	rcall	.+104    	; 0xfde6 <verifySpace>
+      putch(SIGNATURE_0);
+    fd7e:	8e e1       	ldi	r24, 0x1E	; 30
+    fd80:	11 d0       	rcall	.+34     	; 0xfda4 <putch>
+      putch(SIGNATURE_1);
+    fd82:	86 e9       	ldi	r24, 0x96	; 150
+    fd84:	0f d0       	rcall	.+30     	; 0xfda4 <putch>
+      putch(SIGNATURE_2);
+    fd86:	8a e0       	ldi	r24, 0x0A	; 10
+    fd88:	7a cf       	rjmp	.-268    	; 0xfc7e <main+0x7e>
+    }
+    else if (ch == 'Q') {
+    fd8a:	81 35       	cpi	r24, 0x51	; 81
+    fd8c:	39 f4       	brne	.+14     	; 0xfd9c <main+0x19c>
+	  // Multiplo: send response and cause wd reset to start application when leaving program mode
+	  putch(STK_INSYNC);
+    fd8e:	84 e1       	ldi	r24, 0x14	; 20
+    fd90:	09 d0       	rcall	.+18     	; 0xfda4 <putch>
+	  putch(STK_OK);
+    fd92:	80 e1       	ldi	r24, 0x10	; 16
+    fd94:	07 d0       	rcall	.+14     	; 0xfda4 <putch>
+	  // Multiplo: Set WD to 64ms instead of 16ms for the 2 chars enqueued to be sent apropiately, if not, avrdude screams
+	  watchdogConfig(WATCHDOG_64MS);
+    fd96:	8a e0       	ldi	r24, 0x0A	; 10
+    fd98:	0d d0       	rcall	.+26     	; 0xfdb4 <watchdogConfig>
+    fd9a:	ff cf       	rjmp	.-2      	; 0xfd9a <main+0x19a>
+	  while (1);
+    }
+    else {
+      // This covers the response to commands like STK_ENTER_PROGMODE
+      verifySpace();
+    fd9c:	24 d0       	rcall	.+72     	; 0xfde6 <verifySpace>
+    }
+    putch(STK_OK);
+    fd9e:	80 e1       	ldi	r24, 0x10	; 16
+    fda0:	01 d0       	rcall	.+2      	; 0xfda4 <putch>
+    fda2:	60 cf       	rjmp	.-320    	; 0xfc64 <main+0x64>
+
+0000fda4 <putch>:
+  }
+}
+
+void putch(char ch) {
+    fda4:	98 2f       	mov	r25, r24
+#ifndef SOFT_UART
+  while (!(UCSR0A & _BV(UDRE0)));
+    fda6:	80 91 c0 00 	lds	r24, 0x00C0
+    fdaa:	85 ff       	sbrs	r24, 5
+    fdac:	fc cf       	rjmp	.-8      	; 0xfda6 <putch+0x2>
+  UDR0 = ch;
+    fdae:	90 93 c6 00 	sts	0x00C6, r25
+      [uartBit] "I" (UART_TX_BIT)
+    :
+      "r25"
+  );
+#endif
+}
+    fdb2:	08 95       	ret
+
+0000fdb4 <watchdogConfig>:
+    "wdr\n"
+  );
+}
+
+void watchdogConfig(uint8_t x) {
+  WDTCSR = _BV(WDCE) | _BV(WDE);
+    fdb4:	e0 e6       	ldi	r30, 0x60	; 96
+    fdb6:	f0 e0       	ldi	r31, 0x00	; 0
+    fdb8:	98 e1       	ldi	r25, 0x18	; 24
+    fdba:	90 83       	st	Z, r25
+  WDTCSR = x;
+    fdbc:	80 83       	st	Z, r24
+}
+    fdbe:	08 95       	ret
+
+0000fdc0 <getch>:
+      "r25"
+  );
+#endif
+}
+
+uint8_t getch(void) {
+    fdc0:	06 c0       	rjmp	.+12     	; 0xfdce <getch+0xe>
+);
+#else
+  while(!(UCSR0A & _BV(RXC0))) {
+	// Multiplo: Check Run switch
+	RunSwState = RUNSW_PIN & _BV(RUNSW);
+	if (!RunSwState) {
+    fdc2:	37 99       	sbic	0x06, 7	; 6
+    fdc4:	03 c0       	rjmp	.+6      	; 0xfdcc <getch+0xc>
+	  // Shorten WD Timeout
+	  watchdogConfig(WATCHDOG_16MS);
+    fdc6:	88 e0       	ldi	r24, 0x08	; 8
+    fdc8:	f5 df       	rcall	.-22     	; 0xfdb4 <watchdogConfig>
+    fdca:	ff cf       	rjmp	.-2      	; 0xfdca <getch+0xa>
+}
+#endif
+
+// Watchdog functions. These are only safe with interrupts turned off.
+void watchdogReset() {
+  __asm__ __volatile__ (
+    fdcc:	a8 95       	wdr
+      [uartBit] "I" (UART_RX_BIT)
+    :
+      "r25"
+);
+#else
+  while(!(UCSR0A & _BV(RXC0))) {
+    fdce:	80 91 c0 00 	lds	r24, 0x00C0
+    fdd2:	87 ff       	sbrs	r24, 7
+    fdd4:	f6 cf       	rjmp	.-20     	; 0xfdc2 <getch+0x2>
+	  while (1);
+	}
+	// Nothing happened: Watchdog reset
+	watchdogReset();
+  }
+  if (!(UCSR0A & _BV(FE0))) {
+    fdd6:	80 91 c0 00 	lds	r24, 0x00C0
+    fdda:	84 fd       	sbrc	r24, 4
+    fddc:	01 c0       	rjmp	.+2      	; 0xfde0 <getch+0x20>
+}
+#endif
+
+// Watchdog functions. These are only safe with interrupts turned off.
+void watchdogReset() {
+  __asm__ __volatile__ (
+    fdde:	a8 95       	wdr
+       * don't care that an invalid char is returned...)
+       */
+    watchdogReset();
+  }
+  
+  ch = UDR0;
+    fde0:	80 91 c6 00 	lds	r24, 0x00C6
+  LED_PIN |= _BV(LED);
+#endif
+#endif
+
+  return ch;
+}
+    fde4:	08 95       	ret
+
+0000fde6 <verifySpace>:
+  do getch(); while (--count);
+  verifySpace();
+}
+
+void verifySpace() {
+  if (getch() != CRC_EOP) {
+    fde6:	ec df       	rcall	.-40     	; 0xfdc0 <getch>
+    fde8:	80 32       	cpi	r24, 0x20	; 32
+    fdea:	19 f0       	breq	.+6      	; 0xfdf2 <verifySpace+0xc>
+    watchdogConfig(WATCHDOG_16MS);    // shorten WD timeout
+    fdec:	88 e0       	ldi	r24, 0x08	; 8
+    fdee:	e2 df       	rcall	.-60     	; 0xfdb4 <watchdogConfig>
+    fdf0:	ff cf       	rjmp	.-2      	; 0xfdf0 <verifySpace+0xa>
+    while (1)			      // and busy-loop so that WD causes
+      ;				      //  a reset and app start.
+  }
+  putch(STK_INSYNC);
+    fdf2:	84 e1       	ldi	r24, 0x14	; 20
+}
+    fdf4:	d7 cf       	rjmp	.-82     	; 0xfda4 <putch>
+
+0000fdf6 <getNch>:
+    ::[count] "M" (UART_B_VALUE)
+  );
+}
+#endif
+
+void getNch(uint8_t count) {
+    fdf6:	1f 93       	push	r17
+    fdf8:	18 2f       	mov	r17, r24
+  do getch(); while (--count);
+    fdfa:	e2 df       	rcall	.-60     	; 0xfdc0 <getch>
+    fdfc:	11 50       	subi	r17, 0x01	; 1
+    fdfe:	e9 f7       	brne	.-6      	; 0xfdfa <getNch+0x4>
+  verifySpace();
+    fe00:	f2 df       	rcall	.-28     	; 0xfde6 <verifySpace>
+}
+    fe02:	1f 91       	pop	r17
+    fe04:	08 95       	ret
+
+0000fe06 <appStart>:
+  WDTCSR = _BV(WDCE) | _BV(WDE);
+  WDTCSR = x;
+}
+
+void appStart() {
+  watchdogConfig(WATCHDOG_OFF);
+    fe06:	80 e0       	ldi	r24, 0x00	; 0
+    fe08:	d5 df       	rcall	.-86     	; 0xfdb4 <watchdogConfig>
+  __asm__ __volatile__ (
+    fe0a:	ee 27       	eor	r30, r30
+    fe0c:	ff 27       	eor	r31, r31
+    fe0e:	09 94       	ijmp

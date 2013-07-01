@@ -1,0 +1,26 @@
+::Power.Pack3AA::
+
+- La idea:
+	- El Power.Pack3AA es un pack de mayor corriente que el PowerPackAAA, para 3 elementos AA, con un Polyswitch mayor también (aunque
+	finalmente, en la versión 1.0 se utilzó el mismo Poly, tras las pruebas, por no existir un valor adecuado en los que se conseguían
+	en Argentina, en cuanto a la corriente de trip).
+	
+- Versiones:
+	- v2.0:
+		- Portapilas más económico, con poly SMD exactamente del valor que queremos, con los clips soldados a una placa, y con soporte
+		mecánico para las pilas en corte laser.
+		- Este portapilas debería mejorar, con respecto al v1.0:
+			- Más económico, fácil y rápido de montar.
+			- Mejor conducción de la corriente en el circuito serie interno.
+			- Polyswitch de un valor más acorde a la corriente de las pilas AA.
+			- Más "Multiplo".
+			- Más fácil de usar (sobre todo en cuanto colocar y sacar las pilas).
+			- Soporta conector MiniPower (JST) o cable.
+	- v1.0:
+		- Fabricado con portapilas plástico, el cual tiene un cable interno AWG26.
+		- El poly se suelda en el cable interno, en un proceso manual bastante laborioso.
+
+
+- Ideas iniciales:
+	- El ancho puede ser múltiplo de 9, de 3, o como en el AAA, un múltiplo de 3 más 4.5 mm (36 mm + 4.5 mm = 40.5 mm, medida 
+	que tiene que ver con que quepan 3 portapilas en un octógono de N10).

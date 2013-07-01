@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+1370456321 source:c:\clientes\robotgroup\duinobot 2.3\firmware\dualboot2\hiduploader\source.windows\source\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdarg.h>
+	<string.h>
+	<unistd.h>
+	"ihex.h"
+	"usb_XXX.h"
+	<conio.h>
+	<windows.h>
+
+1323920386 c:\clientes\robotgroup\duinobot 2.3\firmware\dualboot2\hiduploader\source.windows\source\ihex.h
+
+1370456341 c:\clientes\robotgroup\duinobot 2.3\firmware\dualboot2\hiduploader\source.windows\source\usb_xxx.h
+
+1370456285 source:c:\clientes\robotgroup\duinobot 2.3\firmware\dualboot2\hiduploader\source.windows\source\usb_windows.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdarg.h>
+	<string.h>
+	<unistd.h>
+	"usb_XXX.h"
+	<windows.h>
+	<setupapi.h>
+	<ddk/hidsdi.h>
+	<ddk/hidclass.h>
+
+1344019798 source:c:\clientes\robotgroup\duinobot 2.3\firmware\dualboot2\hiduploader\source.windows\source\ihex.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdarg.h>
+	<string.h>
+	<unistd.h>
+	"ihex.h"
+
+1370457112 source:c:\clientes\robotgroup\duinobot 2.3\firmware\hiduploader\source.windows\source\usb_windows.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdarg.h>
+	<string.h>
+	<unistd.h>
+	"usb_XXX.h"
+	<windows.h>
+	<setupapi.h>
+	<ddk/hidsdi.h>
+	<ddk/hidclass.h>
+
+1370456341 c:\clientes\robotgroup\duinobot 2.3\firmware\hiduploader\source.windows\source\usb_xxx.h
+
+1344019798 source:c:\clientes\robotgroup\duinobot 2.3\firmware\hiduploader\source.windows\source\ihex.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdarg.h>
+	<string.h>
+	<unistd.h>
+	"ihex.h"
+
+1323920386 c:\clientes\robotgroup\duinobot 2.3\firmware\hiduploader\source.windows\source\ihex.h
+

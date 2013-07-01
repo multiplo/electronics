@@ -1,0 +1,2 @@
+- 2013.06.07:
+	- Up to date, this only has been compiled and tested under Windows.

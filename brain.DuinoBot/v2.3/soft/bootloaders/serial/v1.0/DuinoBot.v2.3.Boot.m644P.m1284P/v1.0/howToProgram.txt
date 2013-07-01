@@ -1,0 +1,5 @@
+::DuinoBot.v2.3::
+
+1. First program the ATMega16U2: connect the USBasp to its ISP connector, and run DuinoBot.mega16U2.USBAsp.bat.
+2. Second program the ATMega1284p: connect the USBasp to its ISP connector, and run DuinoBot.mega1284.USBAsp.bat.
+3. Finally, run the test protocol with DuinoPack.v1.0 (can be downloaded from this link: http://multiplo.org/category/software/).
